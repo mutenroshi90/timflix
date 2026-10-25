@@ -1,37 +1,37 @@
-# PlxNative Privacy Policy
+# TIMflix Privacy Policy
 
-Applies to PlxNative 0.6.0. Last updated 4 September 2026.
+Applies to TIMflix 0.6.0. Last updated 4 September 2026.
 
-## Who is responsible for PlxNative data
+## Who is responsible for TIMflix data
 
-Gleb Linnik is responsible only for data PlxNative stores locally and for optional reports you
+Gleb Linnik is responsible only for data TIMflix stores locally and for optional reports you
 choose to share. Contact: `support@plxnative.com`.
 
 ## Plex services
 
-PlxNative is an independent client for Plex. To sign you in, discover servers and provide Plex
+TIMflix is an independent client for Plex. To sign you in, discover servers and provide Plex
 account features, the app communicates directly with Plex services. Plex processes information
 received by those services under [Plex’s own Privacy
-Policy](https://www.plex.tv/about/privacy-legal/). PlxNative’s developer does not receive that
+Policy](https://www.plex.tv/about/privacy-legal/). TIMflix’s developer does not receive that
 information.
 
 ## Plex Media Servers
 
-To browse and play media, update watch progress and use server features, PlxNative communicates
+To browse and play media, update watch progress and use server features, TIMflix communicates
 directly with the Plex Media Servers you select. Those requests are handled by the selected server
-and its operator. PlxNative’s developer does not receive them.
+and its operator. TIMflix’s developer does not receive them.
 
 ## Data stored on this television
 
-PlxNative has a developer-only input/frame recorder used to reproduce and test bugs. It is not
+TIMflix has a developer-only input/frame recorder used to reproduce and test bugs. It is not
 part of the app you installed: a release build has the developer-trigger inputs, including the
 recorder, compiled out — there is no code path in a release binary that can open, write or read a
 recording, on this television or off it. The unconditional `plxnative-*.log` files are create-only
 diagnostics, not trigger inputs. The recorder exists only in development builds used to build and
-test PlxNative itself, is started only by explicitly arming it on that build, and its recordings
+test TIMflix itself, is started only by explicitly arming it on that build, and its recordings
 never leave the device it was made on.
 
-PlxNative stores your Plex account token and a separate token for each server you use. For every
+TIMflix stores your Plex account token and a separate token for each server you use. For every
 profile on your account you have switched to on this television, it also keeps that profile's own
 server access token(s), so a later switch still works with no internet, and, for a PIN-protected
 profile, a one-way check computed from that PIN rather than the PIN itself. It also keeps the
@@ -50,7 +50,7 @@ when a fresh check of the server no longer reaches the same address, at a sign-i
 a profile switch unless the new profile reaches that server at the same address, or when the app
 returns from the background).
 It keeps no bookmark of its own for where you stopped watching: playback position is held by your
-Plex Media Server. The Settings screen can sign out and remove PlxNative data from this television.
+Plex Media Server. The Settings screen can sign out and remove TIMflix data from this television.
 
 Those lifetimes differ. Signing out removes the sign-in, the servers registered with it and their
 tokens, every profile's own cached server access token(s) and PIN check, the cached profile
@@ -65,11 +65,11 @@ its category off or sign out. The event log and the error-output log are emptied
 kept until the television restarts (the television clears its temporary storage then), and the storage
 snapshot is replaced when its bounded status changes. **webOS gives an application no way to run code as it
 is removed**, so the sign-in and the reporting answers can survive an uninstall — use Delete all
-local data before uninstalling if you want nothing of PlxNative left on the television.
+local data before uninstalling if you want nothing of TIMflix left on the television.
 
 ## Optional crash reports
 
-Crash reporting is off until you choose to share it. If enabled, PlxNative sends technical crash
+Crash reporting is off until you choose to share it. If enabled, TIMflix sends technical crash
 details to Sentry in Germany. A report may include the signal, code addresses, thread information,
 internal component labels, app and webOS versions, television model and hardware compatibility
 details needed to reproduce and symbolicate the failure.
@@ -88,11 +88,11 @@ They are collected only while crash reporting is enabled and accompany a crash r
 sent as usage events. Disabling crash reports removes the local trace.
 
 When the television's own crash reporter leaves nothing for a crash that was a native fault (a
-signal such as a segmentation fault), PlxNative sends a simpler report built from its own crash
+signal such as a segmentation fault), TIMflix sends a simpler report built from its own crash
 log instead. It carries the same kernel name and release, webOS and hardware compatibility
 details as a native report (plus the same `probe` fact described for playback-error reports
 below), and the file name (never the folder) and build identifier of each
-library (a library of the television's firmware or one bundled with PlxNative) the faulting
+library (a library of the television's firmware or one bundled with TIMflix) the faulting
 address and the return address were in, with the library's load address and size. A library that
 has no build identifier (the television's own C library has none) is still named, with its load
 address and size and an all-zero placeholder identifier, as the native report lists it. It carries the
@@ -105,7 +105,7 @@ folder or other file content is sent.
 
 When the crash was a Rust panic rather than a fault, the fallback report is smaller still: the
 source file and line of the panic, a hash of the panic message (the message itself is never sent),
-the app version and build identifier of PlxNative, the `environment` label of the build (`production`
+the app version and build identifier of TIMflix, the `environment` label of the build (`production`
 or `development`), the time of the panic (read and bounded as above), the same kernel name and release,
 webOS and hardware compatibility details (including the `probe` fact) that the fault fallback report carries, and
 the Crash report ID below. It carries none of the library details above.
@@ -122,7 +122,7 @@ Settings shows it while crash reports are on. Turning crash reports off, or sign
 the local identifier; enabling them later creates a new one. Reports already sent keep the old
 identifier, so copy it down first if you intend to ask for their deletion.
 
-While crash reports are on, PlxNative also sends one small **session record** for each stretch of
+While crash reports are on, TIMflix also sends one small **session record** for each stretch of
 use, even when nothing crashed, so that crash-free sessions can be counted per release: the start
 time, its length, how it ended (exited, crashed or ended abnormally), a crash count, the Crash
 report ID, the app version and the build's `environment` label — no content, title, account or
@@ -249,7 +249,7 @@ automatically.
 ## Optional product analytics
 
 Product analytics is a separate choice and is off until you choose to share it. If enabled,
-PlxNative sends typed screen and feature events, broad sign-in and playback outcome classes and,
+TIMflix sends typed screen and feature events, broad sign-in and playback outcome classes and,
 when you leave a screen, broad classes of how smoothly the app ran on it (`route.left`: late
 frames, frozen frames, the app not responding, a remote key pressed repeatedly with nothing
 happening) to PostHog in Germany. The last is performance data about the app, never what you
@@ -271,7 +271,7 @@ Every product analytics event also carries this bounded compatibility and connec
 
 | property | value |
 |---|---|
-| `app_version` | the PlxNative package version |
+| `app_version` | the TIMflix package version |
 | `webos_release` | the webOS release reported by nyx |
 | `webos_api` | the webOS API version reported by nyx |
 | `webos_codename` | the webOS firmware family reported by nyx |
@@ -327,5 +327,5 @@ report is sent only when you press Send report; quote the Report ID it showed to
 Privacy questions may be sent to `support@plxnative.com`. Security vulnerabilities may be reported
 privately through GitHub Security Advisories for `GLinnik21/plx-native`.
 
-PlxNative is an independent, unofficial application. It is not produced by, endorsed by, or
+TIMflix is an independent, unofficial application. It is not produced by, endorsed by, or
 affiliated with Plex, Inc. or LG Electronics Inc.
