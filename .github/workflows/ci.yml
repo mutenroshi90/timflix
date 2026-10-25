@@ -294,6 +294,13 @@ jobs:
           set -o pipefail
           make check-cargo-unit-default 2>&1 | tee "$RUNNER_TEMP/make-check.log"
 
+      - name: Name the failing tests
+        # TIMflix fork: a job log needs a sign-in to read and an annotation does not, so a red run
+        # says which tests failed on its summary page.
+        if: failure()
+        shell: bash
+        run: grep -E '^test .* FAILED$|panicked at' "$RUNNER_TEMP/make-check.log" | head -20 | sed 's/^/::error::/' || true
+
       - id: size
         name: Count the tests this job ran
         run: |
@@ -362,6 +369,13 @@ jobs:
         run: |
           set -o pipefail
           make check-cargo-unit-hostsim 2>&1 | tee "$RUNNER_TEMP/make-check.log"
+
+      - name: Name the failing tests
+        # TIMflix fork: a job log needs a sign-in to read and an annotation does not, so a red run
+        # says which tests failed on its summary page.
+        if: failure()
+        shell: bash
+        run: grep -E '^test .* FAILED$|panicked at' "$RUNNER_TEMP/make-check.log" | head -20 | sed 's/^/::error::/' || true
 
       - id: size
         name: Count the tests this job ran
@@ -437,7 +451,17 @@ jobs:
           fetch-depth: 0
 
       - name: make check-python-harness
-        run: make check-python-harness
+        shell: bash
+        run: |
+          set -o pipefail
+          make check-python-harness 2>&1 | tee "$RUNNER_TEMP/harness.log"
+
+      - name: Name the failing tests
+        # TIMflix fork: a job log needs a sign-in to read and an annotation does not, so a red run
+        # says which tests failed on its summary page.
+        if: failure()
+        shell: bash
+        run: grep -E '^(FAIL|ERROR): ' "$RUNNER_TEMP/harness.log" | head -20 | sed 's/^/::error::/' || true
 
   # The one name anything outside this file may refer to: it is what the single job was called, and
   # it is RED unless every host job above is green. `if: always()` because a job that needs a failed
