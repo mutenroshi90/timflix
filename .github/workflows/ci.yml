@@ -299,7 +299,8 @@ jobs:
         # says which tests failed on its summary page.
         if: failure()
         shell: bash
-        run: grep -E '^test .* FAILED$|panicked at' "$RUNNER_TEMP/make-check.log" | head -20 | sed 's/^/::error::/' || true
+        run: |
+          grep -E '^test .* FAILED$|panicked at' "$RUNNER_TEMP/make-check.log" | head -20 | sed 's/^/::error::/' || true
 
       - id: size
         name: Count the tests this job ran
@@ -375,7 +376,8 @@ jobs:
         # says which tests failed on its summary page.
         if: failure()
         shell: bash
-        run: grep -E '^test .* FAILED$|panicked at' "$RUNNER_TEMP/make-check.log" | head -20 | sed 's/^/::error::/' || true
+        run: |
+          grep -E '^test .* FAILED$|panicked at' "$RUNNER_TEMP/make-check.log" | head -20 | sed 's/^/::error::/' || true
 
       - id: size
         name: Count the tests this job ran
@@ -461,7 +463,8 @@ jobs:
         # says which tests failed on its summary page.
         if: failure()
         shell: bash
-        run: grep -E '^(FAIL|ERROR): ' "$RUNNER_TEMP/harness.log" | head -20 | sed 's/^/::error::/' || true
+        run: |
+          grep -E '^(FAIL|ERROR): ' "$RUNNER_TEMP/harness.log" | head -20 | sed 's/^/::error::/' || true
 
   # The one name anything outside this file may refer to: it is what the single job was called, and
   # it is RED unless every host job above is green. `if: always()` because a job that needs a failed
