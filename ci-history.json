@@ -1,0 +1,9 @@
+{"updated":"2026-10-25T12:26:13Z",
+"ci":[],
+"sim":[
+{"id":40192591874,"at":"2026-10-25T12:19:26Z","sha":"df35eb318","title":"Point the source, contact and about texts at the TIMflix fork","pr":null,"conclusion":"failure","attempt":1,"jobs":{"Windows launcher syntax":20,"macOS tests against bundled FFmpeg and ASS":183,"Linux simulator build + launch":398},"failed":["macOS simulator build + launch"]}
+],
+"nightly":[],
+"cancelled":{},
+"daily":[],
+"flaky":[]}
