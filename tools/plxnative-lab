@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""plxnative-lab — receive diagnostic snapshots from PlxNative running in LG Cloud Test Lab.
+"""plxnative-lab — receive diagnostic snapshots from TIMflix running in LG Cloud Test Lab.
 
 LG rents us physical televisions and gives us a picture and a virtual remote. It gives us no
 console, no ssh, no stdout and no way to download a file, so a bug reproduced on a k8hpp webOS 10

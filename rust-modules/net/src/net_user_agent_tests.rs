@@ -12,7 +12,7 @@ use super::*;
 use std::sync::Arc;
 
 /// The one value every wire test of this crate installs.
-pub(crate) const WIRE_USER_AGENT: &str = "PlxNativeTest/1.2.3 (wire)";
+pub(crate) const WIRE_USER_AGENT: &str = "TIMflixTest/1.2.3 (wire)";
 
 /// Install [`WIRE_USER_AGENT`] and prove it is the installed one: the first call of the process
 /// wins, so a test that installed a different value first would otherwise be graded against it.
@@ -50,7 +50,7 @@ fn recorded(served: &Observed) -> Vec<String> {
 
 /// A value whose second line would be a header of its own on the plaintext path, which writes the
 /// installed value into the request text unescaped.
-const INJECTED: &str = "PlxNative/1.0\r\nX-Injected: 1";
+const INJECTED: &str = "TIMflix/1.0\r\nX-Injected: 1";
 
 /// Whatever `set_user_agent` was given, what the transport would send holds no control character:
 /// a CR or LF splits the request, and a NUL ends the C string curl reads while the plaintext path
@@ -71,8 +71,8 @@ fn every_control_character_is_refused_and_a_plain_value_is_kept_as_written() {
     for bad in ["a\rb", "a\nb", "a\0b", "a\tb", "a\x1bb", "a\x7fb", "a\u{85}b", "\r\n"] {
         assert!(UserAgent::new(bad.to_string()).is_err(), "{bad:?}");
     }
-    let ua = UserAgent::new("PlxNative/0.9 (webOS; LG) Ünïcode".to_string()).expect("plain text");
-    assert_eq!(ua.text, "PlxNative/0.9 (webOS; LG) Ünïcode");
+    let ua = UserAgent::new("TIMflix/0.9 (webOS; LG) Ünïcode".to_string()).expect("plain text");
+    assert_eq!(ua.text, "TIMflix/0.9 (webOS; LG) Ünïcode");
     assert_eq!(ua.c_string.to_str(), Ok(ua.text.as_str()), "the curl string is the same value");
 }
 

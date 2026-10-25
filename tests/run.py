@@ -34,8 +34,8 @@ For each case in manifest.json this driver:
      --no-early to turn it off);
   6. records PASS/FAIL with the failing evidence line.
 
-Two builds can sit on one television -- com.beb.plxnative, the app users install, and
-com.beb.plxnative.debug beside it -- each with its own app directory, its own SAM id and its own
+Two builds can sit on one television -- de.mutenroshi.timflix, the app users install, and
+de.mutenroshi.timflix.debug beside it -- each with its own app directory, its own SAM id and its own
 runtime root (/tmp for stable, /tmp/<app id> for a flavoured install). Every run here drives
 exactly ONE of them: the flavour comes from --flavor, else the overlay's `flavour` key, else the
 Makefile's own default, and every path that follows is ASKED FOR rather than restated
@@ -124,7 +124,7 @@ FIXTURES_ROOT = serve_fixtures_default_root()
 # (The Makefile spells the variable FLAVOR; this repo's prose, the Rust half and the overlay key
 # spell the word flavour. Both spellings are deliberate, so neither side is being quoted wrong.)
 FLAVOUR = None          # "stable" | "debug"
-APPID = None            # com.beb.plxnative[.<flavour>]
+APPID = None            # de.mutenroshi.timflix[.<flavour>]
 RUNDIR = None           # the runtime root: /tmp for stable, /tmp/<app id> for a flavoured install
 EVENTLOG = None         # <RUNDIR>/plxnative-events.log
 RUN_STREAM_MARK = None  # the remote command text — see _run_stream_pids()
@@ -1266,7 +1266,7 @@ def apply_triggers(tv, files, extra=None):
 
     The glob is scoped to RUNDIR, which is what keeps the two installs out of each other's way: the
     stable root is /tmp itself, and `/tmp/plxnative-*` cannot match the flavoured root beside it
-    (`/tmp/com.beb.plxnative.debug` — the separator is a DOT for exactly this reason, since a
+    (`/tmp/de.mutenroshi.timflix.debug` — the separator is a DOT for exactly this reason, since a
     directory called `plxnative-debug` would read as an armed trigger to `dev::any_trigger_present`
     and silently suppress the other install's who's-watching picker).
 
@@ -6728,7 +6728,7 @@ def run_graphics_profile(scene, cfg, token, phase, output=None):
         sampler.stage()
         # The baseline deliberately closes the SELECTED install. Another installed app and the
         # compositor may still exist, so this is a system floor, not a claim that every active IRQ
-        # in the next leg belongs to PlxNative. Layer two remains global by construction.
+        # in the next leg belongs to TIMflix. Layer two remains global by construction.
         make(["kill", f"TV={cfg['tv']}"], timeout=40)
         baseline_raw = sampler.capture(3.0)
 
@@ -6804,7 +6804,7 @@ def run_graphics_profile(scene, cfg, token, phase, output=None):
         out.write("\n")
 
     summary = [
-        f"PlxNative three-layer graphics profile: fps:{scene['name']}",
+        f"TIMflix three-layer graphics profile: fps:{scene['name']}",
         f"install: {APPID} [{FLAVOUR}]  HWCNT phase={phase}  binary profile={cfg.get('arm_profile', 'unknown')}",
         "",
         "Layer 1 — production present pacing (profilers OFF):",

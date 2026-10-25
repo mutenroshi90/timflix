@@ -1,6 +1,6 @@
 # I1 — ABR baseline on unmodified policy
 
-**Device session 2026-08-26.** LG 49SM9000PLA, webOS 4.10.0, `com.beb.plxnative.debug`.
+**Device session 2026-08-26.** LG 49SM9000PLA, webOS 4.10.0, `de.mutenroshi.timflix.debug`.
 Binary: `5a8ef2ef` + I0 (`88b5d738`) + I0 amendments (`3f9ce72b`) — instrumentation only, no ABR
 policy change. Host suite at that SHA: 1272 Rust + 98 harness green.
 

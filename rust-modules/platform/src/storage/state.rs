@@ -1952,7 +1952,7 @@ mod install_identity_tests {
 
     #[test]
     fn unknown_flavors_are_invalid_and_cross_flavor_reads_are_rejected() {
-        assert_eq!(Flavor::from_app_id("com.beb.plxnative.typo"), None);
+        assert_eq!(Flavor::from_app_id("de.mutenroshi.timflix.typo"), None);
         let state = CanonicalState::new(Flavor::Nightly, Generation([1; 16]));
         let bytes = state.encode().unwrap();
         assert_eq!(

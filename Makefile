@@ -29,8 +29,8 @@
 # make uninstall— remove this flavour from the TV (refuses the stable id)
 #
 # FLAVOR selects WHICH INSTALL every TV-facing target talks to: `debug` (the default —
-# com.beb.plxnative.debug, its own tile, its own sign-in, its own /tmp root) or `stable`
-# (com.beb.plxnative, the app users install). See the FLAVOR block below for why the default is the
+# de.mutenroshi.timflix.debug, its own tile, its own sign-in, its own /tmp root) or `stable`
+# (de.mutenroshi.timflix, the app users install). See the FLAVOR block below for why the default is the
 # developer one. A flavour must be `make FLAVOR=… install`ed once before `deploy` can reach it.
 #
 # RELEASE=1 drops BOTH default cargo features: `devtools` (the on-screen counter) and
@@ -95,10 +95,10 @@ tv-lock-require:
 
 # --- WHICH INSTALL: the FLAVOR axis --------------------------------------------------------
 #
-# Three builds live on one television: `stable` is the app users get (`com.beb.plxnative`, the id
+# Three builds live on one television: `stable` is the app users get (`de.mutenroshi.timflix`, the id
 # in every release, manifest and channel listing); `debug` is the day-to-day developer build
-# beside it (`com.beb.plxnative.debug`) with its own launcher tile, its own sign-in and its own
-# runtime files; `nightly` (`com.beb.plxnative.nightly`) is a third install beside both — same
+# beside it (`de.mutenroshi.timflix.debug`) with its own launcher tile, its own sign-in and its own
+# runtime files; `nightly` (`de.mutenroshi.timflix.nightly`) is a third install beside both — same
 # per-flavour shape (own tile, own sign-in, own runtime root) but ALWAYS a RELEASE=1 build (see
 # `release-guard` below), with its own bumped package version and a dated reported version
 # (`rust-modules/build.rs::emit_version`'s `PLX_CHANNEL=nightly` arm). webOS keys everything — the
@@ -120,7 +120,7 @@ tv-lock-require:
 # is watching.
 #
 # The whitelist is not decoration. `make FLAVOR=stabel deploy` would otherwise mint a third
-# registered app called `com.beb.plxnative.stabel` on the television (LG's id charset accepts it,
+# registered app called `de.mutenroshi.timflix.stabel` on the television (LG's id charset accepts it,
 # so nothing downstream objects) and the symptom is a mystery tile on a TV rather than a message on
 # a terminal. `$(error)` at parse time costs one line.
 FLAVORS     := $(shell python3 ci/flavor.py --list)
@@ -131,7 +131,7 @@ $(if $(filter $(FLAVOR),$(FLAVORS)),,$(error unknown FLAVOR "$(FLAVOR)" — one 
 # The id users get. Also `paths::STABLE_APP_ID` in the Rust half and `STABLE_ID` in ci/flavor.py —
 # three copies of one string, each in a language that cannot see the others, and ci/flavor.py's
 # selftest is what keeps them in step.
-APPID_STABLE = com.beb.plxnative
+APPID_STABLE = de.mutenroshi.timflix
 APPID        = $(if $(filter stable,$(FLAVOR)),$(APPID_STABLE),$(APPID_STABLE).$(FLAVOR))
 APPDIR       = /media/developer/apps/usr/palm/applications/$(APPID)
 
@@ -1753,7 +1753,7 @@ test-crate:
 # passed, 60 ignored, 2026-10-19). It is the managed form of what AGENTS.md used to hand out as a recipe,
 # `CARGO_INCREMENTAL=1 CARGO_TARGET_DIR=/tmp/<dir> cargo test --lib -p plxnative-modules --features
 # hostsim`: every agent picked its own `/tmp/<dir>`, nothing tracked them, and on 2026-10-19 there
-# were 28 PlxNative cargo trees there, 45.6 GiB, none of them known to `make disk` or `build-gc`.
+# were 28 TIMflix cargo trees there, 45.6 GiB, none of them known to `make disk` or `build-gc`.
 #
 # The target dir is `rust-modules/$(TEST_HOSTSIM_TDIR)`, INSIDE the checkout like `target-fast`: it is
 # gitignored, `tools/build-gc.sh --incremental` drops its `debug/incremental` and `--lanes` /
@@ -2104,7 +2104,7 @@ ipk: pkg/plxnative pkg/plxnative-storage $(APPINFO) release-guard
 
 # THE STABLE INSTALL IS ALWAYS A RELEASE BUILD, and that is a gate rather than a habit.
 #
-# `com.beb.plxnative` is the id users get. A dev-featured binary under it carries the whole
+# `de.mutenroshi.timflix` is the id users get. A dev-featured binary under it carries the whole
 # `/tmp` trigger surface, the world-writable `plxnative-remote` FIFO and the `:8910` capture
 # listener — the exact surface the `cut-release` skill's §2 exists to keep out of a shipped
 # artifact, seen from the other side. Before the flavour split this could only happen by
@@ -2116,7 +2116,7 @@ ipk: pkg/plxnative pkg/plxnative-storage $(APPINFO) release-guard
 # deleted rather than respected.
 # A LAB BUILD IS NEVER THE STABLE ID, and it never ships without its session file.
 #
-# Both halves are the same argument as `release-guard`'s, one feature along. `com.beb.plxnative` is
+# Both halves are the same argument as `release-guard`'s, one feature along. `de.mutenroshi.timflix` is
 # the id users install; a lab-featured binary under it carries an upload endpoint and a bearer
 # secret, which is the one thing in this repository that must never reach a stranger's television.
 # And a LAB build with no `pkg/lab.json` is inert — it boots, logs `lab: INERT`, and answers the
@@ -2488,7 +2488,7 @@ sim-macos-clean:
 	rm -rf $(SIM_DIR)
 
 # ---------------------------------------------------------------------------------------------
-# PlxNative.app — the same host build, packaged as a SELF-CONTAINED macOS application you can send
+# TIMflix.app — the same host build, packaged as a SELF-CONTAINED macOS application you can send
 # to somebody who has none of this installed. `ci/mkmacapp.py` is the whole recipe and its module
 # doc is the account of the three ways it silently ships broken; `docs/macos-app.md` is the design
 # note (what it can and cannot do — chiefly: no video off-device).

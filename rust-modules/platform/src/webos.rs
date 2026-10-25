@@ -270,7 +270,7 @@ fn probe_jail() {
 /// (<https://webostv.developer.lge.com/develop/guides/back-button>, LG vendor documentation — it
 /// describes the WEB runtime's `webOS.platformBack()`, which a native app cannot call, but it is
 /// LG stating what the ROOT press means on this platform). The dev set is 4.10.2, so "launch the
-/// Home launcher" is the behaviour to reproduce, and the app's previous "Exit PlxNative?" question
+/// Home launcher" is the behaviour to reproduce, and the app's previous "Exit TIMflix?" question
 /// was the webOS 6+ shape applied to a webOS 4 television — and it quit, which even there is only
 /// one of the two answers.
 ///

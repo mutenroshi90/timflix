@@ -676,7 +676,7 @@ mod tests {
 
     /// The About page names the binary the user is RUNNING.
     ///
-    /// It was a hand-typed `PlxNative 0.5.0` that no bump script touched, so it could only ever
+    /// It was a hand-typed `TIMflix 0.5.0` that no bump script touched, so it could only ever
     /// have been right by accident. Written against `identity::version()`, the string the
     /// application hands in, so that re-typing a literal here fails: on any developer build the two differ.
     #[test]

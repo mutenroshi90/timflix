@@ -153,7 +153,7 @@ pub type CURLM = c_void;
 //
 // Same candidate list as `net.rs`, in the same order, so a set carrying both SONAMEs binds both
 // tables against the same library. The macOS name is last for the same reason it is there: the
-// host simulator and `PlxNative.app` run this code, and the host suite below drives real libcurl
+// host simulator and `TIMflix.app` run this code, and the host suite below drives real libcurl
 // over plain loopback HTTP.
 plx_base::dynlib! {
     /// The seven multi-interface symbols, frozen to webOS's oldest libcurl (7.53.1). See this

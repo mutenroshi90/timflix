@@ -2,7 +2,7 @@
 """PreToolUse guard: an agent may not turn on the owner's live Watchlist switch.
 
 `plxnative-watchlist-live` in a debug install's runtime root (on the television
-`/tmp/com.beb.plxnative.debug/`) lets a `devtriggers` build send Watchlist add/remove to the REAL
+`/tmp/de.mutenroshi.timflix.debug/`) lets a `devtriggers` build send Watchlist add/remove to the REAL
 plex.tv account (`rust-modules/plex/src/plex/watchlist.rs`, `live_armed`). Without it a debug build
 refuses every write (the Q11 failsafe), which is what keeps an agent's TV run from changing a
 household's Watchlist. The owner creates the file by hand, from their own terminal, when they want to

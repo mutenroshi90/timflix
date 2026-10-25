@@ -1,5 +1,5 @@
 sim: THIS IS THE DESKTOP SIMULATOR, not a television. No video pipeline; frame rates here describe this Mac's GPU and must never be read as an fps gate.
-install: id=com.beb.plxnative flavour=- runtime=/tmp/plxnative-offline-sim-red features=dev APPID_env=unset
+install: id=de.mutenroshi.timflix flavour=- runtime=/tmp/plxnative-offline-sim-red features=dev APPID_env=unset
 appdir: /Users/gleblinnik/Developer/plex/plex-native-poc/.claude/worktrees/bridge-cse_01Qm24rXXAfqZ3nL9gFCJxiM/pkg (PLXNATIVE_APP_DIR)
 webos: /var/run/nyx/os_info.json unreadable (No such file or directory (os error 2)) — version unknown
 webos: /var/run/nyx/device_info.json unreadable (No such file or directory (os error 2)) — model/board unknown

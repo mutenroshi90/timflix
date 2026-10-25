@@ -57,14 +57,14 @@ pub const ENV_STEERABLE: bool = cfg!(feature = "hostsim");
 ///
 /// It is a FALLBACK and a comparison value — never the answer on its own. See [`app_id`]: which
 /// app this process is depends on where it was installed, not on what it was compiled with.
-pub const STABLE_APP_ID: &str = "com.beb.plxnative";
+pub const STABLE_APP_ID: &str = "de.mutenroshi.timflix";
 
 /// The Developer Mode install dir. Only a last-resort fallback now — it is what the app used to
 /// hardcode, so it keeps the historical behaviour if `/proc` is somehow unreadable.
-const LEGACY_APP_DIR: &str = "/media/developer/apps/usr/palm/applications/com.beb.plxnative";
+const LEGACY_APP_DIR: &str = "/media/developer/apps/usr/palm/applications/de.mutenroshi.timflix";
 
-/// **Which install this process is** — `com.beb.plxnative` for the app users get, or
-/// `com.beb.plxnative.<flavour>` for a developer build sitting beside it on the same television.
+/// **Which install this process is** — `de.mutenroshi.timflix` for the app users get, or
+/// `de.mutenroshi.timflix.<flavour>` for a developer build sitting beside it on the same television.
 ///
 /// Read from the INSTALL DIRECTORY, not compiled in, and that is the whole design.
 ///
@@ -124,7 +124,7 @@ fn installed_app_id(exe: &Path) -> Option<String> {
 }
 
 /// The flavour suffix of [`app_id`] — `None` for the app users get, `Some("debug")` for
-/// `com.beb.plxnative.debug`.
+/// `de.mutenroshi.timflix.debug`.
 ///
 /// One definition, so no caller has to know how a flavour is spelled. Everything that must differ
 /// between two installs on one television — the runtime root, the session file, the plex.tv device
@@ -228,7 +228,7 @@ pub fn in_app_dir(name: &str) -> PathBuf {
 /// `None` — the one platform where the app's payload is not the executable's own directory.
 ///
 /// Structural, not name-based: it asks whether the two directories above the binary are literally
-/// `Contents/MacOS`, which is what makes something a bundle. A `PlxNative.app` renamed by the
+/// `Contents/MacOS`, which is what makes something a bundle. A `TIMflix.app` renamed by the
 /// person it was sent to still answers yes; a loose `plxnative-sim` in `target-sim/debug` still
 /// answers no, so the dev loop is untouched.
 ///
@@ -254,7 +254,7 @@ fn macos_bundle_resources(_exe: &Path) -> Option<PathBuf> {
 }
 
 /// Where a **bundled macOS app** keeps everything it writes: `~/Library/Application
-/// Support/PlxNative`.
+/// Support/TIMflix`.
 ///
 /// The default runtime root is `/tmp`, which is right on the television and wrong for a Mac app
 /// somebody was sent: `auth.json` lives in this root (see [`session_candidates`]), and `/tmp` is
@@ -272,7 +272,7 @@ fn macos_app_support() -> Option<PathBuf> {
     if home.is_empty() {
         return None;
     }
-    Some(PathBuf::from(home).join("Library/Application Support/PlxNative"))
+    Some(PathBuf::from(home).join("Library/Application Support/TIMflix"))
 }
 
 #[cfg(not(target_os = "macos"))]
@@ -844,21 +844,21 @@ mod tests {
     #[test]
     fn the_app_id_is_the_install_directory_and_only_a_real_one() {
         use std::path::Path;
-        let dev = "/media/developer/apps/usr/palm/applications/com.beb.plxnative.debug/plxnative";
-        let hbc = "/media/cryptofs/apps/usr/palm/applications/com.beb.plxnative/plxnative";
+        let dev = "/media/developer/apps/usr/palm/applications/de.mutenroshi.timflix.debug/plxnative";
+        let hbc = "/media/cryptofs/apps/usr/palm/applications/de.mutenroshi.timflix/plxnative";
         let nightly =
-            "/media/developer/apps/usr/palm/applications/com.beb.plxnative.nightly/plxnative";
+            "/media/developer/apps/usr/palm/applications/de.mutenroshi.timflix.nightly/plxnative";
         assert_eq!(
             super::installed_app_id(Path::new(dev)).as_deref(),
-            Some("com.beb.plxnative.debug")
+            Some("de.mutenroshi.timflix.debug")
         );
         assert_eq!(
             super::installed_app_id(Path::new(hbc)).as_deref(),
-            Some("com.beb.plxnative")
+            Some("de.mutenroshi.timflix")
         );
         assert_eq!(
             super::installed_app_id(Path::new(nightly)).as_deref(),
-            Some("com.beb.plxnative.nightly")
+            Some("de.mutenroshi.timflix.nightly")
         );
         // A host build: the parent is `debug`, whose parent is `target-sim` — not `applications`.
         // Without this arm the simulator would mint an app called `debug`, take `/tmp/debug` as its
@@ -869,7 +869,7 @@ mod tests {
         .is_none());
         // The macOS bundle layout, for the same reason.
         assert!(super::installed_app_id(Path::new(
-            "/A/PlxNative.app/Contents/MacOS/plxnative-sim"
+            "/A/TIMflix.app/Contents/MacOS/plxnative-sim"
         ))
         .is_none());
         // …and the real process resolves to SOMETHING, on either platform, without panicking.
@@ -889,13 +889,13 @@ mod tests {
             None
         );
         assert_eq!(
-            "com.beb.plxnative.debug"
+            "de.mutenroshi.timflix.debug"
                 .strip_prefix(super::STABLE_APP_ID)
                 .and_then(|r| r.strip_prefix('.')),
             Some("debug")
         );
         assert_eq!(
-            "com.beb.plxnative.nightly"
+            "de.mutenroshi.timflix.nightly"
                 .strip_prefix(super::STABLE_APP_ID)
                 .and_then(|r| r.strip_prefix('.')),
             Some("nightly")
@@ -920,11 +920,11 @@ mod tests {
             return; // a host build answers from the environment first; this is the television rule
         }
         let stable = super::resolve_runtime_dir(None, None, super::STABLE_APP_ID);
-        let debug = super::resolve_runtime_dir(None, None, "com.beb.plxnative.debug");
-        let nightly = super::resolve_runtime_dir(None, None, "com.beb.plxnative.nightly");
+        let debug = super::resolve_runtime_dir(None, None, "de.mutenroshi.timflix.debug");
+        let nightly = super::resolve_runtime_dir(None, None, "de.mutenroshi.timflix.nightly");
         assert_eq!(stable, std::path::Path::new("/tmp"));
-        assert_eq!(debug, std::path::Path::new("/tmp/com.beb.plxnative.debug"));
-        assert_eq!(nightly, std::path::Path::new("/tmp/com.beb.plxnative.nightly"));
+        assert_eq!(debug, std::path::Path::new("/tmp/de.mutenroshi.timflix.debug"));
+        assert_eq!(nightly, std::path::Path::new("/tmp/de.mutenroshi.timflix.nightly"));
         assert_ne!(
             stable.join("plxnative-events.log"),
             debug.join("plxnative-events.log")
@@ -967,7 +967,7 @@ mod tests {
         if !super::ENV_STEERABLE {
             return; // a television build has neither concept
         }
-        let sup = std::path::PathBuf::from("/Users/x/Library/Application Support/PlxNative");
+        let sup = std::path::PathBuf::from("/Users/x/Library/Application Support/TIMflix");
         assert_eq!(
             super::resolve_runtime_dir(None, Some(sup.clone()), super::STABLE_APP_ID),
             sup
@@ -1052,7 +1052,7 @@ mod tests {
             ]
         };
         let a = named(super::STABLE_APP_ID);
-        let b = named("com.beb.plxnative.debug");
+        let b = named("de.mutenroshi.timflix.debug");
         assert!(
             a.iter().all(|p| !b.contains(p)),
             "{a:?} and {b:?} share a session file"

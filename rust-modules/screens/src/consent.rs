@@ -1398,7 +1398,7 @@ fn preview() -> String {
 }
 
 /// The privacy policy this screen's Information section opens — **`ui::legal`'s document, not a
-/// copy of it.** The row promises "the complete PlxNative privacy policy for this build", and the
+/// copy of it.** The row promises "the complete TIMflix privacy policy for this build", and the
 /// only text that can keep that promise is the one the Legal notices index shows under the same
 /// name.
 ///

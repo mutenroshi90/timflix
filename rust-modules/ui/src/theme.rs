@@ -71,7 +71,7 @@ const SAND_100: [f32; 4] = rgb8(0xe9, 0xe6, 0xe0);
 
 // Atmosphere — deliberately dark, warm light for a pre-content route. These are not state colours
 // and never ink a control; together they stand in for an artwork UltraBlur envelope before the
-// catalog has supplied one. The range stays on PlxNative's graphite/amber axis so first-run does
+// catalog has supplied one. The range stays on TIMflix's graphite/amber axis so first-run does
 // not invent a rainbow identity before any actual artwork exists.
 //
 // **Corrected 2026-09-02.** The first cut of these four stops sat within ~15 8-bit codes of
@@ -920,7 +920,7 @@ pub const DANGER_IDLE_TINT: f32 = 0.16;
 /// The colour is a property of the ACTION and is worn while nothing is focused, so the label is
 /// named before the remote reaches it; the FILL is still a property of FOCUS
 /// ([`DANGER`] whole, under [`TEXT_PRIMARY`]). That split is what keeps a destructive control a
-/// PlxNative control rather than a red button borrowed from somewhere else.
+/// TIMflix control rather than a red button borrowed from somewhere else.
 pub const CONTROL_DANGER_IDLE_FILL: [f32; 4] = mix(CONTROL_IDLE_FILL, DANGER, DANGER_IDLE_TINT);
 /// The label over [`CONTROL_DANGER_IDLE_FILL`] — the danger ink itself. The hue is stated twice on
 /// an idle destructive control (a tinted plate AND a tinted label) because at ten feet the plate

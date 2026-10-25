@@ -3729,7 +3729,7 @@ mod tests {
                 &s, ALERT_GROUP, Placed { rect: Rect::FULL, rest_rect: Rect::FULL, clip: Rect::FULL, index: None }, &cx);
             assert_eq!(seat.elem, if sendable { ALERT_SEND } else { ALERT_CANCEL }, "{state:?}");
             let body = s.report.details_body();
-            let support = "PlxNative 0 · webOS 0 · set · pin_create";
+            let support = "TIMflix 0 · webOS 0 · set · pin_create";
             if matches!(state, S::Delivered { .. } | S::Saved { .. }) {
                 assert_eq!(body, ["Report ID: 41de 4cd3 88e4 0416 54de 38f2 787c 3922", support], "{state:?}");
             } else {
@@ -4034,7 +4034,7 @@ mod tests {
         let mut s = bare_screen(phase, 0.0);
         s.error = Arc::from("Can’t reach Plex");
         s.report.offer = Some(incident(state, kind));
-        s.report.support = CString::new("PlxNative 0 · webOS 0 · set · pin_create").unwrap();
+        s.report.support = CString::new("TIMflix 0 · webOS 0 · set · pin_create").unwrap();
         s
     }
 

@@ -76,7 +76,7 @@ pub struct CurlVersionInfo {
 // one-symbol-per-wrapper assumption.
 //
 // **The third name is macOS's, and it is what makes the desktop build able to SIGN IN.** The host
-// simulator and the `PlxNative.app` bundle run this same module, and on a Mac the two ELF SONAMEs
+// simulator and the `TIMflix.app` bundle run this same module, and on a Mac the two ELF SONAMEs
 // simply do not open — which is why signing in "did not work off-device" and was written up as an
 // unfixable property of the simulator. It was one missing candidate: macOS ships libcurl in the
 // dyld shared cache and `dlopen("libcurl.4.dylib")` resolves it with no install, no Homebrew and
@@ -1080,7 +1080,7 @@ mod loopback_pms {
         let mut ca_params = CertificateParams::new(Vec::<String>::new()).expect("ca params");
         // Distinct subjects: rcgen defaults both to the same CN, which makes OpenSSL read the leaf
         // as self-signed ("error 18") and refuse to chain it to the CA.
-        ca_params.distinguished_name.push(rcgen::DnType::CommonName, "PlxNative test CA");
+        ca_params.distinguished_name.push(rcgen::DnType::CommonName, "TIMflix test CA");
         ca_params.is_ca = IsCa::Ca(BasicConstraints::Unconstrained);
         ca_params.key_usages = vec![KeyUsagePurpose::KeyCertSign, KeyUsagePurpose::CrlSign];
         let ca = ca_params.self_signed(&ca_key).expect("ca cert");

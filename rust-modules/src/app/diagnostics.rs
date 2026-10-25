@@ -2075,7 +2075,7 @@ mod tests {
             "[ŵéƀÖŠ üñķñöŵñ — öš_ïñƒö.ĵšöñ üñŕéàðàƀļé··············]",
         ] {
             for idle in [true, false] {
-                let identity = format!("PlxNative 0.7.0-dev · dev · {os} · surface 1920×1080");
+                let identity = format!("TIMflix 0.7.0-dev · dev · {os} · surface 1920×1080");
                 let verdict = "Playback failed — the server could not open the requested stream".to_string();
                 let panel = header_fixture(idle, [identity.clone(), verdict]);
                 let frame = panel.panel_rect();

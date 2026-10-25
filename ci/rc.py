@@ -2,7 +2,7 @@
 """Release candidates: plan the next `rc/vX.Y.Z-rc.N`, and render its prerelease body. Stdlib only;
 the one subprocess it runs is `git`, over the checkout the workflow already has.
 
-A release candidate is the STABLE package (`com.beb.plxnative`, the id users install) of a version
+A release candidate is the STABLE package (`de.mutenroshi.timflix`, the id users install) of a version
 that has not shipped yet, built exactly the way `.github/workflows/release.yml` builds the release
 and published as a GitHub prerelease. Three things set it apart from the release, and nothing else:
 
@@ -136,11 +136,11 @@ def render_notes(*, label: str, sha: str, base_tag: "str | None", prev_tag: "str
                             f"(https://github.com/{repo}/compare/{prev_tag}...{tag})")
 
     return "\n\n".join([
-        f"Release candidate {label} of PlxNative {version}, built from "
+        f"Release candidate {label} of TIMflix {version}, built from "
         f"[`{sha[:7]}`]({commit_link}). If nothing turns up, the same source ships as {version}.",
 
-        "**It installs as PlxNative itself, not as a separate app.** It replaces the regular "
-        "PlxNative on your television, the same way an update does; PlxNative Nightly and other "
+        "**It installs as TIMflix itself, not as a separate app.** It replaces the regular "
+        "TIMflix on your television, the same way an update does; TIMflix Nightly and other "
         "separate installs are left alone. It is not offered in the Homebrew Channel, and because "
         f"it carries the package version {version}, the Channel will not offer the final {version} "
         "as an update over it either: reinstall the final release by hand once it is out.",
@@ -211,7 +211,7 @@ def _selftest() -> int:
                         prev_tag="rc/v0.8.0-rc.1", ipk="plxnative-v0.8.0-rc.2.ipk",
                         sha256="deadbeef" * 8, repo="GLinnik21/plx-native",
                         changes=["- Home: something (#471)"])
-    check("replaces the regular PlxNative" in body, "notes say it replaces the stable install")
+    check("replaces the regular TIMflix" in body, "notes say it replaces the stable install")
     check("will not offer the final 0.8.0" in body, "notes warn the final is not offered over it")
     check("/compare/v0.7.0...rc/v0.8.0-rc.2" in body, "notes compare against the last release")
     check("/compare/rc/v0.8.0-rc.1...rc/v0.8.0-rc.2" in body, "notes link the previous candidate")

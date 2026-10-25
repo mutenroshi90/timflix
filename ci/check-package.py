@@ -1291,7 +1291,7 @@ check(binary.exists(), f"the staged payload carries the binary ({binary.name})")
 # THE ID IS THE RULE, and it is graded whatever the stamp says — note the `if IS_STABLE`
 # below sits BESIDE the `BUILD` branch, never inside it.
 #
-# `com.beb.plxnative` is what a user installs, so a dev-featured binary under it ships the whole
+# `de.mutenroshi.timflix` is what a user installs, so a dev-featured binary under it ships the whole
 # /tmp trigger surface, the world-writable `plxnative-remote` FIFO and the `:8910` listener to the
 # public. The Makefile's `release-guard` refuses to BUILD that; this is the same rule on the bytes,
 # which is the half that survives someone reaching for the documented `ALLOW_DEV_ON_STABLE=1`
@@ -1495,8 +1495,8 @@ elif sha_file.exists():
 
 # The Makefile derives IPK_VERSION from appinfo.json, so the built filename is the fourth witness.
 # Scoped to THIS flavour's id: two flavours' artifacts can sit in pkg/ side by side, and the
-# `_arm.ipk` suffix in the pattern is what keeps `com.beb.plxnative_*` from also matching
-# `com.beb.plxnative.debug_*` (the dot is not a `_`, but a bare prefix test would still match).
+# `_arm.ipk` suffix in the pattern is what keeps `de.mutenroshi.timflix_*` from also matching
+# `de.mutenroshi.timflix.debug_*` (the dot is not a `_`, but a bare prefix test would still match).
 built = sorted((ROOT / "pkg").glob(f"{PACKAGED_ID}_*_arm.ipk"))
 if built:
     check(len(built) == 1, f"exactly one built {PACKAGED_ID} ipk in pkg/ (saw {[p.name for p in built]})")
@@ -1708,8 +1708,8 @@ for loc in staged_locales:
     check(set(staged_loc) == LOCALIZED_KEYS,
           f"staged {loc}/appinfo.json carries exactly {sorted(LOCALIZED_KEYS)} (saw {sorted(staged_loc)})")
     # THE flavour assertion, and the only one that can fail for the debug package alone: a localized
-    # descriptor overrides the top-level one, so a tile reading `PlxNative debug` in English and
-    # `PlxNative` in Korean is two installs that cannot be told apart on a Korean set.
+    # descriptor overrides the top-level one, so a tile reading `TIMflix debug` in English and
+    # `TIMflix` in Korean is two installs that cannot be told apart on a Korean set.
     check(staged_loc.get("title") == appinfo["title"],
           f'staged {loc}/appinfo.json title == the staged top-level title ({appinfo["title"]!r})')
     if loc in tracked_locales:

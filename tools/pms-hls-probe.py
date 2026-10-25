@@ -370,11 +370,11 @@ def _request_headers(
         "Accept": accept,
         "X-Plex-Token": token,
         "X-Plex-Client-Identifier": client_id,
-        "X-Plex-Product": "PlxNative ABR Probe",
+        "X-Plex-Product": "TIMflix ABR Probe",
         "X-Plex-Version": "1",
         "X-Plex-Platform": "webOS",
         "X-Plex-Device": "TV",
-        "X-Plex-Model": "PlxNative",
+        "X-Plex-Model": "TIMflix",
         "X-Plex-Client-Profile-Name": "Generic",
         "X-Plex-Client-Profile-Extra": PROFILE,
     }

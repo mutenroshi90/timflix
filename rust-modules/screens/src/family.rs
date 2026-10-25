@@ -41,7 +41,7 @@ pub enum SettingsPage {
     Privacy,
     /// The Legal index.
     Legal,
-    /// About PlxNative, a document pushed straight from the root.
+    /// About TIMflix, a document pushed straight from the root.
     About,
     /// One Legal document, by index into `screens::legal`'s page list.
     Document(u8),

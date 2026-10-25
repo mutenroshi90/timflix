@@ -1,4 +1,4 @@
-/* PlxNative — an unofficial native Plex client for LG webOS.
+/* TIMflix — an unofficial native Plex client for LG webOS.
  * Copyright © 2026 Gleb Linnik. Licensed under GPL-3.0-or-later; see LICENSE at the repository
  * root, and THIRD-PARTY-NOTICES.md for the components this links or redistributes.
  * Not affiliated with, endorsed by, or sponsored by Plex GmbH or LG Electronics.
@@ -34,7 +34,7 @@ extern void plx_crash_write_image_marker(int fd); /* identify this binary in the
 extern void plx_launch_args(const char *json); /* SAM's launch payload — see rust-modules/platform/src/tv/launch.rs */
 
 /* Where this INSTALL's runtime files live — `/tmp/plxnative-events.log` for the app users get,
- * `/tmp/com.beb.plxnative.debug/plxnative-events.log` for a developer build installed beside it.
+ * `/tmp/de.mutenroshi.timflix.debug/plxnative-events.log` for a developer build installed beside it.
  *
  * The answer comes from Rust (`plx_runtime_path`, rust-modules/base/src/paths.rs) rather than from a
  * literal here, and that is the whole point: this file opens three logs before a single line of

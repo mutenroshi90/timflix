@@ -37,10 +37,10 @@ behind `Probes` so a test can supply its own.
 THE LADDER (docs/disk-budget.md; LRU, least recently built first, within each rung):
 
     0  garbage: tombstones, orphaned fleet trees, trees of lanes `origin/main` already contains,
-       PlxNative `/tmp` trees untouched for 24 h
+       TIMflix `/tmp` trees untouched for 24 h
     1  content dedup of idle trees (a later PR; listed as skipped)
     2  incremental dirs of OTHER idle lanes (the main checkout waits for rung 6)
-    3  younger PlxNative `/tmp` trees, idle >= 15 min
+    3  younger TIMflix `/tmp` trees, idle >= 15 min
     4  whole derived trees of OTHER idle lanes
     5  the `--stale` sweep (not sized; planned unless the main checkout IS the current one: from a lane, or
        with `--no-build` as `--auto` runs it, it is planned; from the main checkout with a build in view it is not)
@@ -69,7 +69,7 @@ lock, a held `make check` lock, or an `lsof` that could not answer), the current
 and there never the tree being built), the main checkout (except its `--stale` sweep at rung 5 and its
 incremental dirs at rung 6), anything under a checkout's `pkg/` or `vendor/` and the shared FFmpeg cache's
 live entries (its `.tombstone.` leftovers are rung 0), a tree on another volume, any cargo tree without
-a PlxNative marker (`CACHEDIR.TAG` alone proves nothing: two `rs-matter` trees belong to another project
+a TIMflix marker (`CACHEDIR.TAG` alone proves nothing: two `rs-matter` trees belong to another project
 and are reported "not ours"), and the cargo seed (its blocks are shared with the lanes cloned from it, so
 deleting it frees almost nothing: measured 12K private against 478M by `du`).
 
@@ -224,7 +224,7 @@ from typing import Callable, Dict, Iterable, List, Optional, Sequence, Tuple
 # (the comfort line, the reserve and the build estimates are defined above, with the fast path)
 HYSTERESIS_GIB = 4               # about one cold host `target`, so the next build does not reclaim again
 IDLE_SECS = 15 * 60              # a tree written in the last 15 minutes is somebody's current work
-TMP_GARBAGE_SECS = 24 * 3600     # a PlxNative /tmp tree this old is nobody's current work
+TMP_GARBAGE_SECS = 24 * 3600     # a TIMflix /tmp tree this old is nobody's current work
 LEFTOVER_SECS = 24 * 3600        # cargo-seed's own LEFTOVER_MAX_AGE
 
 PLX_MARKERS = ("plx_", "libplx_", "plxnative")   # entry names that make a cargo tree ours
@@ -282,7 +282,7 @@ class Tree:
     owner: str = ""                       # lane name, "main", or "" for a tree nobody owns
     tombstone: bool = False               # the name carries `.tombstone.`: an interrupted delete
     orphan: bool = False                  # a fleet tree whose worktree is gone
-    plx: bool = True                      # a PlxNative marker was found in it
+    plx: bool = True                      # a TIMflix marker was found in it
     tracked: bool = False                 # git tracks a file under it
     dev: int = 0
     private_bytes: int = 0                # what deleting the whole tree frees
@@ -352,7 +352,7 @@ def never(tree: Tree, inv: Inventory) -> str:
     if tree.tracked:
         return "git tracks a file in it"
     if not tree.plx:
-        return "not ours: no PlxNative marker"
+        return "not ours: no TIMflix marker"
     if inv.volume_dev and tree.dev and tree.dev != inv.volume_dev:
         return "on another volume than the build"
     if tree.kind == "seed":
@@ -438,11 +438,11 @@ def classify(tree: Tree, inv: Inventory, th: Thresholds, me: Optional[str], now:
         return worth([whole(0, "its lane is already on %s" % (inv.base_ref or "main"), idle_secs=th.idle_secs)], "")
     if tree.kind == "tmp":
         if now - tree.last_built >= th.tmp_garbage_secs:
-            return worth([whole(0, "PlxNative /tmp tree untouched for %s" % age_text(now - tree.last_built),
+            return worth([whole(0, "TIMflix /tmp tree untouched for %s" % age_text(now - tree.last_built),
                                 idle_secs=th.tmp_garbage_secs)], "")
         if not idle:
             return [], "built %s ago" % age_text(now - tree.last_built)
-        return worth([whole(3, "PlxNative /tmp tree, idle %s" % age_text(now - tree.last_built),
+        return worth([whole(3, "TIMflix /tmp tree, idle %s" % age_text(now - tree.last_built),
                             idle_secs=th.idle_secs)], "")
 
     if not idle:
@@ -898,7 +898,7 @@ def discover_tmp_trees(roots: Sequence[str], skip: Sequence[str]) -> List[str]:
 
 
 def tmp_roots(env) -> List[str]:
-    """Where PlxNative cargo trees outside any checkout are looked for: PLX_GC_TMP_ROOTS (an os.pathsep
+    """Where TIMflix cargo trees outside any checkout are looked for: PLX_GC_TMP_ROOTS (an os.pathsep
     list; an empty value means the defaults), else /tmp and $TMPDIR."""
     explicit = [p for p in (env.get("PLX_GC_TMP_ROOTS") or "").split(os.pathsep) if p]
     return explicit or ["/tmp"] + ([env["TMPDIR"]] if env.get("TMPDIR") else [])
@@ -1213,7 +1213,7 @@ def render(inv: Inventory, th: Thresholds, free: int, total: int, me: str, build
     order = {"main": 0, "lane": 1, "fleet": 2, "tmp": 3, "seed": 4, "leftover": 5}
     for t in sorted(inv.trees, key=lambda t: (order.get(t.kind, 9), t.owner, t.path)):
         if not t.plx:
-            state = "not ours: no PlxNative marker, never touched"
+            state = "not ours: no TIMflix marker, never touched"
         elif t.path in kept and not rungs_of.get(t.path):
             state = kept[t.path]
         else:
@@ -1247,7 +1247,7 @@ def render(inv: Inventory, th: Thresholds, free: int, total: int, me: str, build
     lines.append("  a `?` is not estimated (the `--stale` sweep sizes itself); rung 6 runs only when the build "
                  "would otherwise be refused")
     lines.append("  never planned: the current checkout (rung 6 aside), live trees, tracked files, pkg/, vendor/, "
-                 "the FFmpeg cache's live entries, non-PlxNative trees")
+                 "the FFmpeg cache's live entries, non-TIMflix trees")
     tail = log_tail(env)
     if tail:
         lines.append("")
@@ -1409,7 +1409,7 @@ def cmd_reclaim(args, env) -> int:
 
 
 def cmd_tmp_trees(args, env) -> int:
-    """The PlxNative cargo trees outside any checkout and the fleet dir, on the build's volume: the one
+    """The TIMflix cargo trees outside any checkout and the fleet dir, on the build's volume: the one
     discovery `build-gc.sh --evict` uses to know what a /tmp path may be. One realpath per line."""
     root = real(args.root)
     wts, _ = worktrees(root)
@@ -1817,7 +1817,7 @@ def main(argv: Sequence[str]) -> int:
     fp.add_argument("--wait-secs", type=float, default=DEFAULT_WAIT_SECS,
                     help="how long to wait on a reclaim already running (default %d)" % DEFAULT_WAIT_SECS)
 
-    tp = with_root(sub.add_parser("tmp-trees", help="print the PlxNative cargo trees outside any checkout"))
+    tp = with_root(sub.add_parser("tmp-trees", help="print the TIMflix cargo trees outside any checkout"))
 
     pp = with_root(sub.add_parser("probe", help="is this tree safe to delete right now? exit 0: yes"))
     pp.add_argument("--tree", required=True, help="the cargo target directory the path belongs to")

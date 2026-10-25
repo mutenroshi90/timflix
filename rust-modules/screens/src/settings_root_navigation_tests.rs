@@ -189,7 +189,7 @@ fn back_at_the_surface_s_own_root_is_not_handled() {
 }
 
 /// **The remembered-focus round trip (spec §7.3 step 4).** Signed out, the root's rows are
-/// Video & playback / Language / Privacy & data / Legal notices / About PlxNative (signed out
+/// Video & playback / Language / Privacy & data / Legal notices / About TIMflix (signed out
 /// there is no Favourites row), so row 3 is Legal notices. The engine seats
 /// focus there, OK pushes the index, and a BACK must hand focus back to THAT row — not row 0
 /// — which is the one thing `bridge.rs`'s word-only assertions cannot see from outside `app/`.

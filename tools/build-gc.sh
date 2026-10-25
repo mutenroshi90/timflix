@@ -183,16 +183,16 @@ usage: tools/build-gc.sh [MODE] [-n]
 
   (no mode)       report every checkout's derived trees, the shared cache and free space, then
                   the disk budget (tools/disk-budget.py report): each tree's PRIVATE bytes, the
-                  PlxNative cargo trees under /tmp, and what a reclaim WOULD take, in order.
+                  TIMflix cargo trees under /tmp, and what a reclaim WOULD take, in order.
                   Read-only: it deletes nothing. `--evict` is the mode that acts on a plan
   --evict PLAN    delete what a PLAN names, and nothing else: PLAN is the file
                   `tools/disk-budget.py reclaim --to GIB --emit` prints (what to evict, in what
                   order, down to what free space). The one narrow deleting mode, and the one
                   `--auto` drives. Every line of the plan is
-                  UNTRUSTED: the path must still BE a derived PlxNative build tree (a checkout's
+                  UNTRUSTED: the path must still BE a derived TIMflix build tree (a checkout's
                   `rust-modules/target*` or an `incremental` dir in one, a `target*` under
                   $PLX_FLEET_DIR, an interrupted delete's leftover under the build cache, or a
-                  PlxNative cargo tree under /tmp or $TMPDIR, found by the planner's own
+                  TIMflix cargo tree under /tmp or $TMPDIR, found by the planner's own
                   discovery, never a registered worktree's); a tracked file, `pkg/`, `vendor/`,
                   another project's tree, a symlink, the cargo seed, a live FFmpeg cache entry,
                   the main checkout's whole `target` and any rung the ladder does not make from
@@ -309,7 +309,7 @@ usage: tools/build-gc.sh [MODE] [-n]
                   so the next tick does not reclaim again. A planner that fails or is missing
                   deletes nothing. What the five fixed stages it replaces did differently: the
                   main checkout's incremental cache and a lane's vendor build trees are no longer
-                  cleared by default, the cargo seed is never evicted, and PlxNative trees left
+                  cleared by default, the cargo seed is never evicted, and TIMflix trees left
                   under /tmp are now in scope. Never --cache, never a tracked file. Single-instance:
                   a mkdir lock (stale-safe, $PLX_GC_LOCK_DIR) means a second --auto exits 0 quietly
                   rather than racing the first. Logs one line per stage to $PLX_GC_LOG (default
@@ -516,7 +516,7 @@ run_auto_planner() {
 # trees are no longer cleared by default (the former is the tree a human iterates in and waits for
 # the last rung; the latter are not derived from cargo and are `--lanes`/`--all` only), the cargo seed
 # is never evicted (its blocks are shared with the lanes cloned from it, so it frees almost nothing;
-# `--seed` remains for hand use), PlxNative trees left under /tmp are now in scope, and the stop
+# `--seed` remains for hand use), TIMflix trees left under /tmp are now in scope, and the stop
 # line is the threshold plus the hysteresis rather than the threshold itself.
 run_auto_mode() {
   if [ -z "$DRY" ]; then
@@ -831,7 +831,7 @@ run_stale_sweep_dir() {
 # test would classify it from a coincidence. Deleting a tree BECAUSE the environment names it would
 # be exactly the "preserve unrelated generated artifacts" rule this repository states outright. The
 # destructive scope is therefore $FLEET_DIR, whose layout this script defines, plus (for `--evict`
-# only) the planner's own /tmp discovery: a cargo tree under /tmp or $TMPDIR that carries a PlxNative
+# only) the planner's own /tmp discovery: a cargo tree under /tmp or $TMPDIR that carries a TIMflix
 # marker and has sat idle past the plan's window. An exported tree that happens to be one of those is
 # found by that rule, never by the export; anything else is shown so you can decide for yourself.
 env_trees_report_only() {
@@ -1217,7 +1217,7 @@ derived_output() {
     pkg/mali-irq-sample|pkg/sockprobe|pkg/logmprobe) ;;
     pkg/*.ipk|pkg/ipk.sha256|pkg/lib*-plx.so.*|pkg/libass-plx-host.so.0*|pkg/libass-plx.0.dylib.*.new) ;;
     pkg/*.dylib|pkg/symbols|pkg/.ffabi-ok|pkg/.ffabi-host-ok|pkg/.build-config|pkg/.config-local-stamp) ;;
-    pkg/.flavor|pkg/PlxNative.app|pkg/PlxNative-*|pkg/*.link.*|pkg/link-evidence) ;;
+    pkg/.flavor|pkg/TIMflix.app|pkg/TIMflix-*|pkg/*.link.*|pkg/link-evidence) ;;
     ipkroot/*.tar.gz|ipkroot/debian-binary|ipkroot/data/usr|stub/*.so|*.o) ;;
     tools/node_modules|__pycache__|*/__pycache__|*.pyc|.DS_Store|*/.DS_Store) ;;
     .tv-*.pid|.tv-*.log) ;;                                     # a session's scratch, not its address or password
@@ -1268,9 +1268,9 @@ BASE_REF=$(resolve_base_ref)
 #
 #   1. WHAT IT IS. The path is resolved physically and must BE one of: a registered checkout's
 #      `rust-modules/target*` (or an `incremental` dir inside one), a `target*` under $PLX_FLEET_DIR,
-#      an interrupted delete's leftover under the build cache, or a PlxNative cargo tree found by the
+#      an interrupted delete's leftover under the build cache, or a TIMflix cargo tree found by the
 #      planner's own `/tmp` discovery (`disk-budget.py tmp-trees`: one scanner, not two). Anything
-#      else (a tracked file, `pkg/`, `vendor/`, a non-PlxNative tree, a symlink, a path nowhere near
+#      else (a tracked file, `pkg/`, `vendor/`, a non-TIMflix tree, a symlink, a path nowhere near
 #      a checkout, a live FFmpeg cache entry, the cargo seed) is REFUSED, loudly, and the run exits 1.
 #      `target_roots`, not `lane_trees`: the latter includes the vendor build trees.
 #   2. WHAT RUNG IT MAY BE. (class, rung, scope) must be an eviction the ladder can make: the main
@@ -1464,7 +1464,7 @@ ev_line() {
   if [ ! -d "$_path" ]; then ev_refuse "$_path" "not a directory"; return 0; fi
   _real=$(ev_phys "$_path") || { ev_refuse "$_path" "cannot be resolved"; return 0; }
   if ! ev_classify "$_real"; then
-    ev_refuse "$_path" "not a derived PlxNative build tree: not under a checkout's rust-modules/target*, the fleet dir, the cache's leftovers or a /tmp cargo tree of ours"
+    ev_refuse "$_path" "not a derived TIMflix build tree: not under a checkout's rust-modules/target*, the fleet dir, the cache's leftovers or a /tmp cargo tree of ours"
     return 0
   fi
   case "$_scope" in
@@ -1688,7 +1688,7 @@ report)
   envx=$(env_trees_report_only | sort -u)
   if [ -n "$envx" ]; then
     echo
-    echo "exported CARGO_TARGET_DIR / SIM_TDIR (listed, not targeted: only a PlxNative cargo tree under /tmp or \$TMPDIR that --evict finds idle is ever deleted):"
+    echo "exported CARGO_TARGET_DIR / SIM_TDIR (listed, not targeted: only a TIMflix cargo tree under /tmp or \$TMPDIR that --evict finds idle is ever deleted):"
     printf '%s\n' "$envx" | while IFS= read -r d; do
       printf '  %8s  %s\n' "$(fmt_kb "$(du -sk "$d" 2>/dev/null | awk '{print $1}')")" "$d"
     done
@@ -1709,7 +1709,7 @@ report)
   fi
   df -h "$ROOT" | tail -1 | awk '{print "volume              " $4 " free of " $2}'
   # The disk budget's verdicts (tools/disk-budget.py, docs/disk-budget.md): the private bytes each
-  # tree would really free (`du` above counts APFS clones in full), the PlxNative cargo trees under
+  # tree would really free (`du` above counts APFS clones in full), the TIMflix cargo trees under
   # /tmp that nothing above can see, and the order a reclaim WOULD take them in. Read-only. It is
   # run, not sourced, and a failure of it must not end the report: this script is `set -eu`, and
   # the table above is complete without it. The existence test is for the synthetic repositories

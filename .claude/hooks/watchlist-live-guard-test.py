@@ -18,7 +18,7 @@ spec = importlib.util.spec_from_file_location("guard", HOOK)
 guard = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(guard)
 
-T = "/tmp/com.beb.plxnative.debug/plxnative-watchlist-live"
+T = "/tmp/de.mutenroshi.timflix.debug/plxnative-watchlist-live"
 BLOCK, ALLOW = True, False
 CASES = [
     # --- must be blocked: every way of creating the file -------------------------
@@ -30,7 +30,7 @@ CASES = [
     (BLOCK, f"printf '' >>{T}"),
     (BLOCK, f"echo 1 | tee {T}"),
     (BLOCK, f"cp /dev/null {T}"),
-    (BLOCK, f"tools/tv-ssh ssh tv 'cd /tmp/com.beb.plxnative.debug && touch plxnative-watchlist-live'"),
+    (BLOCK, f"tools/tv-ssh ssh tv 'cd /tmp/de.mutenroshi.timflix.debug && touch plxnative-watchlist-live'"),
     (BLOCK, f"python3 -c \"open('{T}', 'w').close()\""),
     (BLOCK, f"python3 -c \"import pathlib; pathlib.Path('{T}').touch()\""),
     (BLOCK, "tools/tv-session.sh up --screen watchlist --arm watchlist-live"),

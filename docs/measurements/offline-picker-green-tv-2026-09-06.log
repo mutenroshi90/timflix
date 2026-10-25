@@ -1,5 +1,5 @@
 == harness
-install: com.beb.plxnative.debug [debug] — triggers and log under /tmp/com.beb.plxnative.debug
+install: de.mutenroshi.timflix.debug [debug] — triggers and log under /tmp/de.mutenroshi.timflix.debug
 test identity: Guest (id=<test-user-id>)  (playback + watch-history isolation)
 TV lock: already held by this lane — inheriting it
 === offline_pick_cached  (rk=4, Offline: pick a household profile on the who's-watching screen with plex.tv unreachable, then play) ===

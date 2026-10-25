@@ -1,4 +1,4 @@
-install: com.beb.plxnative.debug [debug] — triggers and log under /tmp/com.beb.plxnative.debug
+install: de.mutenroshi.timflix.debug [debug] — triggers and log under /tmp/de.mutenroshi.timflix.debug
 fixtures: /Users/gleblinnik/plxnative-fixtures/pipeline
 serving:  http://<pms-host>:52502  (the TV fetches from this address)
 TV lock: already held by this lane — inheriting it
@@ -97,7 +97,7 @@ SUMMARY  (pipeline tier — no Plex)
   [FAIL] pipe_abr_slow_start_then_fast  <- abr_shape
 
 0 passed, 1 failed of 1
-install: com.beb.plxnative.debug [debug] — triggers and log under /tmp/com.beb.plxnative.debug
+install: de.mutenroshi.timflix.debug [debug] — triggers and log under /tmp/de.mutenroshi.timflix.debug
 fixtures: /Users/gleblinnik/plxnative-fixtures/pipeline
 serving:  http://<pms-host>:52573  (the TV fetches from this address)
 TV lock: already held by this lane — inheriting it
@@ -198,7 +198,7 @@ SUMMARY  (pipeline tier — no Plex)
   [PASS] pipe_abr_steady_modest_link
 
 1 passed, 0 failed of 1
-install: com.beb.plxnative.debug [debug] — triggers and log under /tmp/com.beb.plxnative.debug
+install: de.mutenroshi.timflix.debug [debug] — triggers and log under /tmp/de.mutenroshi.timflix.debug
 fixtures: /Users/gleblinnik/plxnative-fixtures/pipeline
 serving:  http://<pms-host>:52653  (the TV fetches from this address)
 TV lock: already held by this lane — inheriting it
@@ -300,7 +300,7 @@ SUMMARY  (pipeline tier — no Plex)
   [PASS] pipe_abr_brief_dropout
 
 1 passed, 0 failed of 1
-install: com.beb.plxnative.debug [debug] — triggers and log under /tmp/com.beb.plxnative.debug
+install: de.mutenroshi.timflix.debug [debug] — triggers and log under /tmp/de.mutenroshi.timflix.debug
 fixtures: /Users/gleblinnik/plxnative-fixtures/pipeline
 serving:  http://<pms-host>:52753  (the TV fetches from this address)
 TV lock: already held by this lane — inheriting it
@@ -405,7 +405,7 @@ SUMMARY  (pipeline tier — no Plex)
       [srv] <TV> "GET /__abr/720/segment.ts?sequence=8&X-Plex-Token=<TOKEN> HTTP/1.1" 200 -
       [srv] client closed mid-body (pipe_h264_aac_mp4.mp4 @0)
       [srv] client closed mid-body (pipe_abr_480p.ts @0)
-install: com.beb.plxnative.debug [debug] — triggers and log under /tmp/com.beb.plxnative.debug
+install: de.mutenroshi.timflix.debug [debug] — triggers and log under /tmp/de.mutenroshi.timflix.debug
 fixtures: /Users/gleblinnik/plxnative-fixtures/pipeline
 serving:  http://<pms-host>:53361  (the TV fetches from this address)
 TV lock: already held by this lane — inheriting it
@@ -507,7 +507,7 @@ SUMMARY  (pipeline tier — no Plex)
   [PASS] pipe_abr_brief_dropout
 
 1 passed, 0 failed of 1
-install: com.beb.plxnative.debug [debug] — triggers and log under /tmp/com.beb.plxnative.debug
+install: de.mutenroshi.timflix.debug [debug] — triggers and log under /tmp/de.mutenroshi.timflix.debug
 fixtures: /Users/gleblinnik/plxnative-fixtures/pipeline
 serving:  http://<pms-host>:53493  (the TV fetches from this address)
 TV lock: already held by this lane — inheriting it

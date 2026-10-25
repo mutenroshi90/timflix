@@ -41,7 +41,7 @@ class StorageServicePackage(unittest.TestCase):
                 root = Path(tmp)
                 (root / "pkg").mkdir()
                 (root / "pkg/plxnative-storage").write_bytes(b"\x7fELF\x01\x01" + bytes(12) + b"\x28\x00")
-                app = {"id": app_id, "title": "PlxNative", "vendor": "PlxNative", "version": "0.6.6"}
+                app = {"id": app_id, "title": "TIMflix", "vendor": "TIMflix", "version": "0.6.6"}
                 data = root / "data"
                 self.stage_app(data, app)
                 mkipk.stage_storage_service(root, data, app)
@@ -80,14 +80,14 @@ class StorageServicePackage(unittest.TestCase):
     def test_archive_checker_rejects_obsolete_state_and_foreign_service(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            (root / "usr/palm/applications/com.beb.plxnative/state").mkdir(parents=True)
-            foreign = root / "usr/palm/services/com.beb.plxnative.debug.storage"
+            (root / "usr/palm/applications/de.mutenroshi.timflix/state").mkdir(parents=True)
+            foreign = root / "usr/palm/services/de.mutenroshi.timflix.debug.storage"
             foreign.mkdir(parents=True)
             (foreign / "auth.json").write_text('{"token":"synthetic-fixture"}')
             archive = root.parent / (root.name + ".tar.gz")
             try:
                 mkipk.write_targz(archive, root, "")
-                errors = mkipk.storage_archive_errors(archive.read_bytes(), "com.beb.plxnative")
+                errors = mkipk.storage_archive_errors(archive.read_bytes(), "de.mutenroshi.timflix")
                 self.assertIn("obsolete writable app state is forbidden", errors)
                 self.assertIn("runtime credentials or rendezvous files must not be packaged", errors)
                 self.assertIn("service payload must contain exactly this flavor's descriptor and helper", errors)
@@ -98,18 +98,18 @@ class StorageServicePackage(unittest.TestCase):
         for name in ("session.json", "consent.json"):
             with self.subTest(name=name), tempfile.TemporaryDirectory() as tmp:
                 root = Path(tmp)
-                data = root / "data/usr/palm/applications/com.beb.plxnative"
+                data = root / "data/usr/palm/applications/de.mutenroshi.timflix"
                 data.mkdir(parents=True)
                 (data / name).write_text("{}")
                 archive = root / "data.tar.gz"
                 mkipk.write_targz(archive, root / "data", "")
-                errors = mkipk.storage_archive_errors(archive.read_bytes(), "com.beb.plxnative")
+                errors = mkipk.storage_archive_errors(archive.read_bytes(), "de.mutenroshi.timflix")
                 self.assertIn("runtime credentials or rendezvous files must not be packaged", errors)
 
     def test_missing_helper_is_a_build_failure(self):
         with tempfile.TemporaryDirectory() as tmp:
             with self.assertRaises(SystemExit):
-                mkipk.stage_storage_service(Path(tmp), Path(tmp) / "data", {"id": "com.beb.plxnative"})
+                mkipk.stage_storage_service(Path(tmp), Path(tmp) / "data", {"id": "de.mutenroshi.timflix"})
 
 
 if __name__ == "__main__":

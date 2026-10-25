@@ -136,7 +136,7 @@ pub type WatchTransport<'a> = &'a mut dyn FnMut(&WatchRequest) -> Result<WatchRe
 #[cfg(feature = "devtriggers")]
 plx_base::devtrig::latched_flag!(
     /// **The owner's live switch** (`plxnative-watchlist-live` in the install's runtime root, on the
-    /// television `/tmp/com.beb.plxnative.debug/`): a `devtriggers` build writes to the real service
+    /// television `/tmp/de.mutenroshi.timflix.debug/`): a `devtriggers` build writes to the real service
     /// while it exists. Off by default, read ONCE at boot ([`announce_live_writes`]), so the owner
     /// creates it and relaunches; `/tmp` does not survive a reboot, and `tools/tv-session.sh up` and
     /// `tests/run.py` sweep every `plxnative-*` trigger, so any agent run turns it off again. **No agent

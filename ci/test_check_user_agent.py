@@ -25,7 +25,7 @@ CLEAN = {
     ALLOWED: 'const CURLOPT_USERAGENT: c_int = 10018;\n'
              'fn line() -> String { format!("User-Agent: {}\\r\\n", ua()) }\n',
     'rust-modules/plex/src/plex/identity.rs': '/// The HTTP `User-Agent` for libcurl.\n'
-                                              'pub fn user_agent() -> String { format!("PlxNative/{}", V) }\n',
+                                              'pub fn user_agent() -> String { format!("TIMflix/{}", V) }\n',
     REFUSES: 'pub const RESERVED: [&str; 2] = ["host", "user-agent"];\n',
     OTHER: 'fn open() { plx_net::net::apply_user_agent(easy); }\n',
     'src/starfish.c': '/* sets the User-Agent: nothing here */ int x(void) { return 0; }\n',

@@ -33,15 +33,15 @@ def write(path, text):
 
 
 CLOCK = "local"   # the trace_clock the fake set starts on, and what the script must restore
-APPDIR = "/media/developer/apps/usr/palm/applications/com.beb.plxnative.debug"
-STABLE_DIR = "/media/developer/apps/usr/palm/applications/com.beb.plxnative"
-JAIL = "/var/palm/jail/com.beb.plxnative.debug"
+APPDIR = "/media/developer/apps/usr/palm/applications/de.mutenroshi.timflix.debug"
+STABLE_DIR = "/media/developer/apps/usr/palm/applications/de.mutenroshi.timflix"
+JAIL = "/var/palm/jail/de.mutenroshi.timflix.debug"
 # The fake /proc: pid -> (exe link target or None, main-thread comm, {tid: comm}). Pid 100 is the debug
 # app (jailed, so its exe has the jail prefix), 60 the STABLE app (its path is a prefix of the debug
 # one's directory name, not a suffix match), 50 the compositor, 70 an unrelated process.
 PROCS = {
     100: (f"{JAIL}{APPDIR}/plxnative", "plxnative", {100: "plxnative", 101: "mali-event-hnd", 102: "mali-renderer"}),
-    60: (f"/var/palm/jail/com.beb.plxnative{STABLE_DIR}/plxnative", "plxnative", {60: "plxnative", 61: "mali-event-hnd"}),
+    60: (f"/var/palm/jail/de.mutenroshi.timflix{STABLE_DIR}/plxnative", "plxnative", {60: "plxnative", 61: "mali-event-hnd"}),
     50: ("/usr/sbin/surface-manager", "surface-manager", {50: "surface-manager", 51: "mali-event-hnd"}),
     70: ("/bin/busybox", "sh", {70: "sh"}),
 }

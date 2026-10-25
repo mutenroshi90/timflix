@@ -222,7 +222,7 @@ impl plx_platform::storage::keymanager::Rpc for Db8 {
 type Store = plx_platform::storage::backend::Backend<Db8>;
 
 fn store() -> Store {
-    plx_platform::storage::backend::Backend::new(Db8::default(), state::Flavor::Stable, "com.beb.plxnative.storage".into())
+    plx_platform::storage::backend::Backend::new(Db8::default(), state::Flavor::Stable, "de.mutenroshi.timflix.storage".into())
 }
 fn try_commit(store: &mut Store, session: &Session, authority: SaveAuthority) -> persistence::CanonicalCommit {
     let mut transport = |request: Request| Ok(store.dispatch(request));

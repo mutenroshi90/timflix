@@ -135,7 +135,7 @@ mod tests {
             "Expect:",
             "Connection: close",
             "Range: bytes=1048576-",
-            "X-Plex-Device-Name: PlxNative (LG TV)",
+            "X-Plex-Device-Name: TIMflix (LG TV)",
             "X-Plex-Language: be",
             "X-Value: tab\there",
             "X-Unicode: Ünïcode",

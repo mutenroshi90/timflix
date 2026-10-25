@@ -8,7 +8,7 @@ the argument plumbing is `rust-modules/platform/src/tv/launch.rs`.
 
 ```text
 luna://com.webos.applicationManager/launch
-{"id":"com.beb.plxnative","params":{"plex":{"server":"<machineIdentifier>","ratingKey":"12345","action":"open"}}}
+{"id":"de.mutenroshi.timflix","params":{"plex":{"server":"<machineIdentifier>","ratingKey":"12345","action":"open"}}}
 ```
 
 | Key | | Meaning |
@@ -40,7 +40,7 @@ luna://com.webos.applicationManager/launch
 - `action: play` starts through the same door as a Play from a page. While a trailer preview is
   still letting go of the engine the play waits; if the engine is still busy when the wait's 12 s
   ceiling passes, the link is dropped with `deeplink: not opened, rk=… (engine busy)`.
-- The debug flavour's id is `com.beb.plxnative.debug`; the contract is the same.
+- The debug flavour's id is `de.mutenroshi.timflix.debug`; the contract is the same.
 
 ## A launch while the app runs
 
@@ -67,7 +67,7 @@ HELPER_HLunaServiceMessage in this SDL` at boot and only a cold launch carries t
 that must work there closes the app first, then launches:
 
 ```text
-luna://com.webos.applicationManager/closeByAppId {"id":"com.beb.plxnative"}
+luna://com.webos.applicationManager/closeByAppId {"id":"de.mutenroshi.timflix"}
 ```
 
 Leave a short pause between the two so the close finishes first; 600 ms worked on the LG C2.

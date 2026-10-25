@@ -4,7 +4,7 @@
 AGENTS.md used to hand out two hand recipes, a `CARGO_TARGET_DIR=/tmp/<dir> cargo test --lib -p
 plxnative-modules --features hostsim` and a `CARGO_INCREMENTAL=0 cargo check ... --no-default-features`,
 and every agent that ran one picked its own `/tmp/<dir>`. Nothing tracked those: on 2026-10-19 there
-were 28 PlxNative cargo trees in `/tmp`, 45.6 GiB, none of them visible to `make disk` or
+were 28 TIMflix cargo trees in `/tmp`, 45.6 GiB, none of them visible to `make disk` or
 `tools/build-gc.sh`. The two make targets replace the recipes, and this pins the property that
 matters, that neither can put a cargo tree outside the checkout:
 

@@ -98,7 +98,7 @@ account seated makes no request at all) lands once as the unavailable read-out, 
 and is not re-asked on a timer.
 
 **The live switch** is `plxnative-watchlist-live` in the install's runtime root (on the television
-`/tmp/com.beb.plxnative.debug/plxnative-watchlist-live`). It is read once at boot, which logs
+`/tmp/de.mutenroshi.timflix.debug/plxnative-watchlist-live`). It is read once at boot, which logs
 `watchlist: LIVE writes enabled by trigger`; each write that goes out then logs
 `watchlist: LIVE PUT <endpoint shape> -> HTTP <status>`. The owner creates it from their own terminal
 and relaunches the app; a reboot clears `/tmp`, and `tools/tv-session.sh up` and `tests/run.py` sweep

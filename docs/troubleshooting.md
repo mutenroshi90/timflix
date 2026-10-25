@@ -104,7 +104,7 @@ overwrites the regular app's logs.
 | Install | Where the log files are |
 | --- | --- |
 | PlxNative (release) | directly in `/tmp/`, for example `/tmp/plxnative-events.log` |
-| PlxNative Nightly | in the folder `/tmp/com.beb.plxnative.nightly/` |
+| PlxNative Nightly | in the folder `/tmp/de.mutenroshi.timflix.nightly/` |
 
 The three files have the same names in both places:
 
@@ -131,7 +131,7 @@ cleared when the TV restarts, because `/tmp` is.
 2. Open the **Files** view. It lists the TV's folders, and its breadcrumb bar at the top starts
    at `/`.
 3. Click `/`, then double-click **tmp**. For PlxNative Nightly, then double-click
-   **com.beb.plxnative.nightly**.
+   **de.mutenroshi.timflix.nightly**.
 4. Click a log file to select it, then click the **Download** button in the toolbar and choose
    where to save it on your computer.
 5. Attach the downloaded files to your [GitHub issue](https://github.com/GLinnik21/plx-native/issues/new/choose).

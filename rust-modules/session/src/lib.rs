@@ -1,4 +1,4 @@
-//! plx_session: the session layer of the PlxNative application core.
+//! plx_session: the session layer of the TIMflix application core.
 //!
 //! `auth` is the plex.tv sign-in and boot flow controller: PIN and QR sign-in, discovery of the
 //! account's servers, who's-watching and the profile PIN, the install of the chosen profile's

@@ -96,7 +96,7 @@ impl plx_platform::storage::keymanager::Rpc for Db8 {
 
 fn helper() -> plx_platform::storage::backend::Backend<Db8> {
     plx_platform::storage::backend::Backend::new(
-        Db8::default(), state::Flavor::Stable, "com.beb.plxnative.storage".into())
+        Db8::default(), state::Flavor::Stable, "de.mutenroshi.timflix.storage".into())
 }
 
 fn stored_public(transport: &mut dyn client::Transport) -> state::PublicPayload {

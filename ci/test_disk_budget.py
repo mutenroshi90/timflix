@@ -6,10 +6,10 @@ inventories and reads the answer. The properties pinned here are the ones whose 
 tree that something needed once the eviction PR acts on these verdicts: the order of the ladder (LRU
 within a rung), stopping at the line instead of at zero, refusing only when the whole ladder cannot
 free the build's estimate plus the reserve, and NEVER planning the current checkout below rung 6 (and
-there never the tree being built), a live tree, a tracked file, `pkg/`, a tree that is not PlxNative's,
+there never the tree being built), a live tree, a tracked file, `pkg/`, a tree that is not TIMflix's,
 or another volume. The second half builds real
 directories and a real git repository in a temp dir and checks the I/O: private-byte accounting under
-hard links, the PlxNative marker, `/tmp` discovery, `origin/main` merged detection (squash merges, a
+hard links, the TIMflix marker, `/tmp` discovery, `origin/main` merged detection (squash merges, a
 local `main` that is behind, and that detecting one writes nothing into the repository), and that
 `report` leaves the disk exactly as it found it.
 """
@@ -487,7 +487,7 @@ NOW_REAL = __import__("time").time()
 
 
 def cargo_tree(path, ours=True, incr=0, size=64 * 1024, hours=5):
-    """A cargo target dir: CACHEDIR.TAG, debug/{deps,.fingerprint,incremental}, PlxNative-named artifacts."""
+    """A cargo target dir: CACHEDIR.TAG, debug/{deps,.fingerprint,incremental}, TIMflix-named artifacts."""
     prefix = "libplx_base" if ours else "librs_matter"
     write(os.path.join(path, "CACHEDIR.TAG"), 16)
     write(os.path.join(path, "debug", "deps", prefix + "-aaaa.rlib"), size, None)

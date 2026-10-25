@@ -547,7 +547,7 @@ fn badge_run_w(badges: &[Badge], measure: &dyn plx_machine::machine::Measure) ->
 fn ticon_box_dx(icon: crate::icons::Icon) -> f32 {
     -crate::icons::ink_x(icon).1 * ACCESSORY_ICON_W
 }
-/// The trailing read-out's WEIGHT: `size::LABEL` **bold**, which is what the `PlxNative Design
+/// The trailing read-out's WEIGHT: `size::LABEL` **bold**, which is what the `TIMflix Design
 /// System`'s `TableView` authors it as (`var(--font-weight-bold) var(--size-label)`) and what its
 /// prose says in words. The product drew it regular until 2026-08-21 — a rung below the row's
 /// HEADLINE label in size, a step behind it in ink, AND a weight lighter, which is three

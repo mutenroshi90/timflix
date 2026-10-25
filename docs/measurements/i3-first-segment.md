@@ -1,7 +1,7 @@
 # I3 — the first segment no longer forces a downshift
 
 **Device session 2026-08-27.** LG 49SM9000PLA, webOS 4.10.0,
-`com.beb.plxnative.debug`. Binary: `36b96679` (`abr: suppress first-segment false
+`de.mutenroshi.timflix.debug`. Binary: `36b96679` (`abr: suppress first-segment false
 downshifts`). Host gate at that SHA: 1 327 Rust tests + 152 harness tests green;
 `cargo +nightly check --lib --no-default-features` green.
 

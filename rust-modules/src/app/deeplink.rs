@@ -4,7 +4,7 @@
 //!
 //! ```text
 //! luna://com.webos.applicationManager/launch
-//! {"id":"com.beb.plxnative","params":{"plex":{"server":"<machineIdentifier>","ratingKey":"12345","action":"open"}}}
+//! {"id":"de.mutenroshi.timflix","params":{"plex":{"server":"<machineIdentifier>","ratingKey":"12345","action":"open"}}}
 //! ```
 //!
 //! - `ratingKey` (required): the item to open, exactly as given. A string or a number, digits only.
@@ -435,7 +435,7 @@ mod tests {
     /// The cold-launch argument exactly as SAM wrote it on the television (webOS 9.2.2).
     #[test]
     fn reads_sams_cold_launch_argument() {
-        let raw = r#"{"event":"launch","reason":"undefined","appId":"com.beb.plxnative","parameters":{"plex":{"server":"abc123","ratingKey":"12345","action":"open"}},"interfaceVersion":2,"interfaceMethod":"registerApp","@system_native_app":true}"#;
+        let raw = r#"{"event":"launch","reason":"undefined","appId":"de.mutenroshi.timflix","parameters":{"plex":{"server":"abc123","ratingKey":"12345","action":"open"}},"interfaceVersion":2,"interfaceMethod":"registerApp","@system_native_app":true}"#;
         assert_eq!(parse(raw), link(Some("abc123"), "12345", Action::Open));
     }
 

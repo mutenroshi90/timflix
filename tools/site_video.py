@@ -69,7 +69,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE_MEDIA = ROOT / "site" / "media"
 CATALOG = ROOT / "tests" / "demo_library" / "catalog.json"
 STORYBOARD = ROOT / "tests" / "video" / "feel.json"
-UA = "PlxNativeSiteVideo/1.0 (+https://github.com/GLinnik21/plex-native-poc)"
+UA = "TIMflixSiteVideo/1.0 (+https://github.com/GLinnik21/plex-native-poc)"
 SCHEMA = 1
 
 
