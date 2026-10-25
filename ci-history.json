@@ -1,6 +1,8 @@
-{"updated":"2026-10-25T12:26:49Z",
+{"updated":"2026-10-25T13:18:43Z",
 "ci":[
-{"id":40192591822,"at":"2026-10-25T12:19:25Z","sha":"df35eb318","title":"Point the source, contact and about texts at the TIMflix fork","pr":null,"conclusion":"failure","attempt":1,"jobs":{"which gates apply":5,"armv7 cross-build and artifact assertions":417,"host python/shell/C gates":212,"host lint + type-checks":205,"cross-build (armv7) + artifact assertions":3},"failed":["host checks (NOT a device gate)","host harness tests","host unit tests (default features)","host unit tests (hostsim)"]}
+{"id":40192591822,"at":"2026-10-25T12:19:25Z","sha":"df35eb318","title":"Point the source, contact and about texts at the TIMflix fork","pr":null,"conclusion":"failure","attempt":1,"jobs":{"which gates apply":5,"armv7 cross-build and artifact assertions":417,"host python/shell/C gates":212,"host lint + type-checks":205,"cross-build (armv7) + artifact assertions":3},"failed":["host checks (NOT a device gate)","host harness tests","host unit tests (default features)","host unit tests (hostsim)"]},
+{"id":40196292724,"at":"2026-10-25T13:09:01Z","sha":"add35456d","title":"CI: name failing tests as annotations","pr":null,"conclusion":"failure","attempt":1,"jobs":{}},
+{"id":40196532127,"at":"2026-10-25T13:12:10Z","sha":"f15ffe3dc","title":"CI: fix the failing-test annotation steps (YAML)","pr":null,"conclusion":"failure","attempt":1,"jobs":{"which gates apply":5,"armv7 cross-build and artifact assertions":368,"host lint + type-checks":123,"host python/shell/C gates":179,"cross-build (armv7) + artifact assertions":3},"failed":["host checks (NOT a device gate)","host harness tests","host unit tests (default features)","host unit tests (hostsim)"]}
 ],
 "sim":[
 {"id":40192591874,"at":"2026-10-25T12:19:26Z","sha":"df35eb318","title":"Point the source, contact and about texts at the TIMflix fork","pr":null,"conclusion":"failure","attempt":1,"jobs":{"Windows launcher syntax":20,"macOS tests against bundled FFmpeg and ASS":183,"Linux simulator build + launch":398},"failed":["macOS simulator build + launch"]}
